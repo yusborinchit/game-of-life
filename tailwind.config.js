@@ -3,7 +3,11 @@
 export default {
   content: ["./index.html", "./**/*.{ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        notoSans: ["Noto Sans", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };
