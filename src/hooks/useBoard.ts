@@ -5,15 +5,31 @@ import {
   DEAD_CELL,
   GAME_LOOP_TICK,
   LIVE_CELL,
-} from "../const";
+} from "../config";
 import { type MatrixCoords } from "../types";
-import { cloneMatrix, countCellNeighbors, createMatrix } from "../utils/matrix";
+import {
+  cloneMatrix,
+  countCellNeighbors,
+  createMatrix,
+  createRandomMatrix,
+} from "../utils/matrix";
 
 const EMPTY_BOARD = createMatrix({ columns: BOARD_COLUMNS, rows: BOARD_ROWS });
 
 export function useBoard() {
   const [isRunning, setIsRunning] = useState(false);
   const [board, setBoard] = useState(EMPTY_BOARD);
+  const [generation, setGeneration] = useState(0);
+
+  const resetBoard = () => {
+    setGeneration(0);
+    setBoard(createMatrix({ columns: BOARD_COLUMNS, rows: BOARD_ROWS }));
+  };
+
+  const randomizeBoard = () => {
+    setGeneration(0);
+    setBoard(createRandomMatrix({ columns: BOARD_COLUMNS, rows: BOARD_ROWS }));
+  };
 
   useEffect(() => {
     if (!isRunning) return;
@@ -40,6 +56,7 @@ export function useBoard() {
         }
       }
 
+      setGeneration((prevGeneration) => prevGeneration + 1);
       setBoard(draft);
     }, GAME_LOOP_TICK);
 
@@ -59,5 +76,13 @@ export function useBoard() {
     setIsRunning(!isRunning);
   };
 
-  return { board, isRunning, toggleCell, toggleRunning };
+  return {
+    board,
+    generation,
+    isRunning,
+    toggleCell,
+    toggleRunning,
+    resetBoard,
+    randomizeBoard,
+  };
 }
