@@ -9,7 +9,7 @@ import {
 import { type MatrixCoords } from "../types";
 import {
   cloneMatrix,
-  countCellNeighbors,
+  countCellNeighbours,
   createMatrix,
   createRandomMatrix,
 } from "../utils/matrix";
@@ -26,7 +26,7 @@ export function useBoard() {
     setBoard(createMatrix({ columns: BOARD_COLUMNS, rows: BOARD_ROWS }));
   };
 
-  const randomizeBoard = () => {
+  const shuffleBoard = () => {
     setGeneration(0);
     setBoard(createRandomMatrix({ columns: BOARD_COLUMNS, rows: BOARD_ROWS }));
   };
@@ -42,16 +42,16 @@ export function useBoard() {
           const cell = board[i][j];
           const isAlive = cell === LIVE_CELL;
 
-          const neighbors = countCellNeighbors({
+          const neighbours = countCellNeighbours({
             matrix: board,
             position: { i, j },
           });
 
           if (isAlive) {
-            if (neighbors > 3 || neighbors <= 1) draft[i][j] = DEAD_CELL;
-            if (neighbors === 2 || neighbors === 3) draft[i][j] = LIVE_CELL;
+            if (neighbours > 3 || neighbours <= 1) draft[i][j] = DEAD_CELL;
+            if (neighbours === 2 || neighbours === 3) draft[i][j] = LIVE_CELL;
           } else {
-            if (neighbors === 3) draft[i][j] = LIVE_CELL;
+            if (neighbours === 3) draft[i][j] = LIVE_CELL;
           }
         }
       }
@@ -83,6 +83,6 @@ export function useBoard() {
     toggleCell,
     toggleRunning,
     resetBoard,
-    randomizeBoard,
+    shuffleBoard,
   };
 }

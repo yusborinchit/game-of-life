@@ -16,15 +16,15 @@ export default function Board({
   board,
   handleToggleCell,
 }: BoardProps) {
-  const cssVariables = {
-    "--cell-width": "1fr",
-    "--columns": columns,
-    "--rows": rows,
-  } as CSSProperties;
-
   return (
-    <section
-      style={cssVariables}
+    <article
+      style={
+        {
+          "--cell-width": "1fr",
+          "--columns": columns,
+          "--rows": rows,
+        } as CSSProperties
+      }
       className="grid grid-cols-[repeat(var(--columns),var(--cell-width))] grid-rows-[repeat(var(--rows),var(--cell-width))] border border-zinc-900"
     >
       {board.map((row, i) =>
@@ -36,6 +36,6 @@ export default function Board({
           />
         ))
       )}
-    </section>
+    </article>
   );
 }

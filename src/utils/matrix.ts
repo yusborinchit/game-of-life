@@ -33,7 +33,7 @@ export function cloneMatrix({ matrix }: { matrix: Matrix }) {
   return clone(matrix);
 }
 
-export function countCellNeighbors({
+export function countCellNeighbours({
   matrix,
   position,
 }: {
@@ -41,7 +41,7 @@ export function countCellNeighbors({
   position: MatrixCoords;
 }) {
   const { i, j } = position;
-  let neighbors = 0;
+  let neighbours = 0;
 
   for (const [x, y] of CELL_MOVEMENTS) {
     const newI = i + x;
@@ -50,10 +50,10 @@ export function countCellNeighbors({
     if (newI < 0 || newI >= matrix.length) continue;
     if (newJ < 0 || newJ >= matrix.length) continue;
 
-    const neighbor = matrix[newI][newJ];
+    const neighbour = matrix[newI][newJ];
 
-    if (neighbor === LIVE_CELL) neighbors++;
+    if (neighbour === LIVE_CELL) neighbours++;
   }
 
-  return neighbors;
+  return neighbours;
 }
